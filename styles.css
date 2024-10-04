@@ -3,25 +3,22 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #f7f7f7;
     color: #333;
-    position: relative;
-    overflow: hidden;
 }
 
 header {
-    background-color: #800080;
+    background-color: #4B0082; /* Roxo */
     color: white;
     padding: 20px;
     text-align: center;
-    position: relative;
-    z-index: 1;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 header h1 {
     font-size: 3em;
     margin: 0;
-    background: linear-gradient(90deg, purple, black, white);
+    background: linear-gradient(90deg, #800080, #000000, #ffffff);
     -webkit-background-clip: text;
     color: transparent;
     animation: colorChange 5s infinite;
@@ -40,63 +37,130 @@ nav ul {
 
 nav ul li {
     display: inline;
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
 nav ul li a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #FFD700; /* Dourado */
 }
 
 .produtos {
     padding: 20px;
     text-align: center;
-    position: relative;
-    z-index: 1;
+    margin: 20px;
 }
 
 .produto {
-    margin-bottom: 20px;
+    background-color: #ffffff; /* Branco */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.produto:hover {
+    transform: scale(1.05);
+}
+
+.produto h3 {
+    margin: 0;
 }
 
 .produto button {
-    background-color: #800080;
+    background-color: #4B0082; /* Roxo */
     color: white;
     border: none;
     padding: 10px;
+    border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .produto button:hover {
-    background-color: #4b0082;
+    background-color: #8A2BE2; /* Azul Violeta */
 }
 
 .reviews, .suporte {
     padding: 20px;
     background-color: #fff;
-    margin: 20px 0;
-    position: relative;
-    z-index: 1;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 footer {
-    background-color: #800080;
+    background-color: #4B0082; /* Roxo */
     color: white;
     padding: 10px;
     text-align: center;
-    position: fixed;
-    bottom: 0;
+    position: relative;
     width: 100%;
-    z-index: 1;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Partículas */
-#particles-js {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: #f0f0f0;
-    z-index: 0;
+footer p {
+    margin: 0;
+}
+
+/* Estilos para os formulários */
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+form label {
+    margin: 5px 0;
+}
+
+form input, form textarea {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+form button {
+    background-color: #4B0082; /* Roxo */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #8A2BE2; /* Azul Violeta */
+}
+
+/* Estilos para reviews */
+#reviews-list {
+    margin-top: 20px;
+}
+
+.review {
+    background-color: #f9f9f9;
+    border-left: 5px solid #4B0082; /* Roxo */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.review h4 {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.review p {
+    margin: 5px 0 0;
 }
