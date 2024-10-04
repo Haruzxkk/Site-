@@ -11,7 +11,7 @@ document.getElementById('support-form').addEventListener('submit', function(even
     const nome = document.getElementById('nome').value;
     const email = document.getElementById('email').value;
     const mensagem = document.getElementById('mensagem').value;
-    const mailtoLink = `mailto:seuemail@dominio.com?subject=Suporte%20ao%20Cliente&body=Nome:%20${encodeURIComponent(nome)}%0DE-mail:%20${encodeURIComponent(email)}%0DMensagem:%20${encodeURIComponent(mensagem)}`;
+    const mailtoLink = `mailto:kharuzx@gmail.com?subject=Suporte%20ao%20Cliente&body=Nome:%20${encodeURIComponent(nome)}%0DE-mail:%20${encodeURIComponent(email)}%0DMensagem:%20${encodeURIComponent(mensagem)}`;
     window.location.href = mailtoLink;
 });
 
