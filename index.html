@@ -1,298 +1,226 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InnoBot Corporation</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #000000, #ffffff);
-            color: #333;
-            overflow: hidden;
+            background: linear-gradient(to right, #141e30, #243b55);
+            color: #fff;
+            animation: backgroundAnimation 20s ease infinite;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
         header {
-            background: #333;
-            color: #fff;
-            padding: 10px 20px;
-            position: relative;
-            z-index: 1000;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        header .logo {
-            margin: 0;
+        h1 {
+            font-size: 2.5em;
+            color: #ffffff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
 
         nav ul {
-            list-style: none;
+            list-style-type: none;
             padding: 0;
         }
 
         nav ul li {
             display: inline;
-            margin-right: 20px;
+            margin: 0 15px;
         }
 
-        nav ul li a {
-            color: #fff;
+        nav a {
+            color: #ffffff;
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffd700;
         }
 
         .section {
             padding: 20px;
-            margin: 10px;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.8);
-            display: none;
-            transition: all 0.5s ease;
+            margin: 20px 0;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .active {
-            display: block;
+        .produtos-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
 
         .produto {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px 0;
-            position: relative;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            transition: transform 0.3s;
         }
 
-        .produto button {
-            background-color: #007bff;
-            color: white;
+        .produto:hover {
+            transform: scale(1.05);
+        }
+
+        button {
+            background-color: #ffd700;
             border: none;
-            padding: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
-        .produto button:hover {
-            background-color: #0056b3;
-        }
-
-        .feedback {
-            display: none;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            padding: 5px;
-            background-color: #28a745;
-            color: white;
-            border-radius: 3px;
-            animation: fadein 1s, fadeout 1s 2s forwards;
-        }
-
-        @keyframes fadein {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeout {
-            from { opacity: 1; }
-            to { opacity: 0; }
+        button:hover {
+            background-color: #fff;
+            transform: translateY(-3px);
         }
 
         footer {
             text-align: center;
-            padding: 10px 0;
-            background: #333;
-            color: #fff;
+            margin-top: 20px;
         }
 
-        #total {
-            font-weight: bold;
-            margin-top: 10px;
+        /* Animação de fundo */
+        @keyframes backgroundAnimation {
+            0% {
+                background: linear-gradient(to right, #141e30, #243b55);
+            }
+            50% {
+                background: linear-gradient(to right, #243b55, #141e30);
+            }
+            100% {
+                background: linear-gradient(to right, #141e30, #243b55);
+            }
         }
 
-        /* Styles for loading screen */
-        #loadingScreen {
+        /* Estilos da barra de carregamento */
+        #loading {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
+            background: rgba(0, 0, 0, 0.7);
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 1000;
         }
 
-        #loadingBar {
-            width: 80%;
-            background-color: #555;
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 20px 0;
-        }
-
-        #progress {
-            height: 30px;
+        .bar {
             width: 0;
-            background-color: #4caf50;
-            text-align: center;
-            line-height: 30px;
-            color: white;
+            height: 30px;
+            background: #ffd700;
+            border-radius: 5px;
+            transition: width 5s;
         }
     </style>
-    <script>
-        const products = {
-            "Bot de Gerenciamento": 10.00,
-            "Bot de Vendas": 15.00,
-            "Bot Personalizado": 30.00
-        };
-        
-        let cart = [];
-
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-                if (section.id === sectionId) {
-                    section.classList.add('active');
-                }
-            });
-        }
-
-        function addToCart(productName) {
-            cart.push(productName);
-            displayFeedback(`Adicionado: ${productName}`);
-            updateCartTotal();
-        }
-
-        function displayFeedback(message) {
-            const feedback = document.createElement('div');
-            feedback.className = 'feedback';
-            feedback.textContent = message;
-            document.body.appendChild(feedback);
-            feedback.style.display = 'block';
-            setTimeout(() => {
-                feedback.style.display = 'none';
-                document.body.removeChild(feedback);
-            }, 4000);
-        }
-
-        function updateCartTotal() {
-            const totalElement = document.getElementById('total');
-            const total = cart.reduce((sum, product) => sum + products[product], 0);
-            totalElement.textContent = `Total: R$ ${total.toFixed(2)}`;
-        }
-
-        function buyProduct() {
-            const userName = prompt("Por favor, digite seu nome:");
-            if (userName) {
-                const loadingScreen = document.getElementById('loadingScreen');
-                loadingScreen.style.display = 'flex';
-
-                // Simulação da barra de progresso
-                const progressBar = document.getElementById('progress');
-                let width = 0;
-
-                const interval = setInterval(() => {
-                    if (width >= 100) {
-                        clearInterval(interval);
-                        loadingScreen.style.display = 'none'; // Esconde a tela de carregamento
-                        const message = `Olá! Gostaria de comprar os seguintes produtos: ${cart.join(', ')}. Meu nome é: ${userName}. Total: R$ ${cart.reduce((sum, product) => sum + products[product], 0).toFixed(2)}`;
-                        const telegramLink = `https://t.me/DevHaruzx?text=${encodeURIComponent(message)}`;
-                        window.open(telegramLink, "_blank");
-                        cart = []; // Limpa o carrinho após a compra
-                        updateCartTotal();
-                    } else {
-                        width++;
-                        progressBar.style.width = width + '%';
-                        progressBar.innerHTML = width + '%';
-                    }
-                }, 50); // Atualiza a barra de progresso a cada 50ms
-            } else {
-                alert("Você precisa digitar seu nome para continuar.");
-            }
-        }
-
-        window.onload = function () {
-            showSection('home');
-        };
-    </script>
 </head>
-
 <body>
-    <header>
-        <h1 class="logo">InnoBot Corporation</h1>
-        <nav>
-            <ul>
-                <li><a href="#" onclick="showSection('home')">Home</a></li>
-                <li><a href="#" onclick="showSection('produtos')">Produtos</a></li>
-                <li><a href="#" onclick="showSection('termos')">Termos de Serviço</a></li>
-                <li><a href="#" onclick="showSection('sobre')">Sobre Nós</a></li>
-                <li><a href="https://t.me/SuporteInno" target="_blank">Suporte</a></li>
-                <li><a href="https://t.me/DevHaruzx" target="_blank">Compra</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="home" class="section active">
-            <h2>Bem-vindo à InnoBot Corporation</h2>
-            <p>Explore nossos produtos inovadores e descubra como nossos bots podem facilitar sua vida!</p>
+    <div class="container">
+        <header>
+            <h1>InnoBot Corporation</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#produtos">Produtos</a></li>
+                    <li><a href="#termos">Termos de Serviço</a></li>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                    <li><a href="#suporte">Suporte</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section id="home" class="section">
+            <h2>Bem-vindo à InnoBot Corporation!</h2>
+            <p>Explore nossos bots inovadores e encontre a solução perfeita para suas necessidades.</p>
         </section>
 
         <section id="produtos" class="section">
             <h2>Nossos Produtos</h2>
-            <div class="produto">
-                <h3>Bot de Gerenciamento</h3>
-                <p>Preço: R$ 10,00</p>
-                <button onclick="addToCart('Bot de Gerenciamento')">Adicionar ao Carrinho</button>
+            <div class="produtos-container">
+                <div class="produto">
+                    <h3>Bot de Gerenciamento</h3>
+                    <p>Preço: R$10,00</p>
+                    <button onclick="comprar('Bot de Gerenciamento', 10)">Comprar</button>
+                </div>
+                <div class="produto">
+                    <h3>Bot de Vendas</h3>
+                    <p>Preço: R$15,00</p>
+                    <button onclick="comprar('Bot de Vendas', 15)">Comprar</button>
+                </div>
+                <div class="produto">
+                    <h3>Bot Personalizado</h3>
+                    <p>Preço: R$30,00</p>
+                    <button onclick="comprar('Bot Personalizado', 30)">Comprar</button>
+                </div>
             </div>
-            <div class="produto">
-                <h3>Bot de Vendas</h3>
-                <p>Preço: R$ 15,00</p>
-                <button onclick="addToCart('Bot de Vendas')">Adicionar ao Carrinho</button>
-            </div>
-            <div class="produto">
-                <h3>Bot Personalizado</h3>
-                <p>Preço: R$ 30,00</p>
-                <button onclick="addToCart('Bot Personalizado')">Adicionar ao Carrinho</button>
-            </div>
-            <div id="total">Total: R$ 0.00</div>
-            <button onclick="buyProduct()">Finalizar Compra</button>
         </section>
 
         <section id="termos" class="section">
             <h2>Termos de Serviço</h2>
-            <ul>
-                <li><strong>Uso Adequado:</strong> Os bots devem ser usados de forma responsável.</li>
-                <li><strong>Política de Reembolso:</strong> Consulte nossa política para mais detalhes.</li>
-                <li><strong>Suporte Técnico:</strong> Oferecemos suporte para todos os nossos produtos.</li>
-            </ul>
+            <p>Estes são os termos de serviço da InnoBot Corporation...</p>
         </section>
 
         <section id="sobre" class="section">
             <h2>Sobre Nós</h2>
-            <p>A InnoBot Corporation é dedicada a desenvolver soluções de automação através de bots. Nosso objetivo é facilitar a vida dos nossos usuários com produtos inovadores e suporte excepcional.</p>
+            <p>A InnoBot Corporation é uma empresa dedicada a desenvolver soluções em bots...</p>
         </section>
 
-        <!-- Loading Screen -->
-        <div id="loadingScreen">
-            <div>
-                <h2>Aguarde...</h2>
-                <div id="loadingBar">
-                    <div id="progress">0%</div>
-                </div>
-                <p>Processando sua compra...</p>
-            </div>
-        </div>
-    </main>
+        <section id="suporte" class="section">
+            <h2>Suporte</h2>
+            <p>Para suporte, entre em contato pelo <a href="https://t.me/SuporteInno" target="_blank">Telegram</a>.</p>
+        </section>
 
-    <footer>
-        <p>&copy; 2024 InnoBot Corporation. Todos os direitos reservados.</p>
-    </footer>
+        <footer>
+            <p>&copy; 2024 InnoBot Corporation. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <div id="loading" style="display: none;">
+        <div class="bar" id="loading-bar"></div>
+    </div>
+
+    <script>
+        function comprar(produto, preco) {
+            // Exibir a barra de carregamento
+            const loading = document.getElementById('loading');
+            loading.style.display = 'flex';
+
+            // Preencher a barra de carregamento
+            const loadingBar = document.getElementById('loading-bar');
+            loadingBar.style.width = '100%';
+
+            // Redirecionar após 5 segundos
+            setTimeout(() => {
+                const message = `Olá! Eu gostaria de comprar o ${produto} por R$${preco}.`;
+                const telegramLink = `https://t.me/DevHaruzx?text=${encodeURIComponent(message)}`;
+                window.location.href = telegramLink;
+            }, 5000);
+        }
+    </script>
 </body>
-
 </html>
