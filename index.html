@@ -51,6 +51,16 @@
             color: #FFD700; /* Dourado */
         }
 
+        .section {
+            display: none; /* Esconder todas as seções por padrão */
+            padding: 20px;
+            text-align: center;
+        }
+
+        .active {
+            display: block; /* Mostrar a seção ativa */
+        }
+
         .produtos {
             padding: 20px;
             text-align: center;
@@ -63,7 +73,9 @@
             border-radius: 10px;
             padding: 20px;
             margin: 15px 0;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            width: 300px; /* Definindo uma largura fixa para melhor alinhamento */
         }
 
         .produto:hover {
@@ -80,23 +92,18 @@
             background-color: #4B0082; /* Roxo */
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 25px; /* Ajustando o padding */
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
             font-size: 16px;
+            font-weight: bold; /* Aumentando a espessura da fonte */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .produto button:hover {
             background-color: #8A2BE2; /* Azul Violeta */
-        }
-
-        .suporte {
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            margin: 20px;
-            border-radius: 10px;
-            text-align: center;
+            transform: translateY(-2px); /* Pequena animação ao passar o mouse */
         }
 
         footer {
@@ -129,11 +136,24 @@
         }
     </style>
     <script>
+        // Função para mostrar a seção ativa
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active'); // Oculta todas as seções
+            });
+            document.getElementById(sectionId).classList.add('active'); // Mostra a seção selecionada
+        }
+
         // Função de compra, redireciona ao Telegram com o produto já selecionado
         function comprarProduto(produto) {
-            const telegramUrl = `https://t.me/Devharuzx?text=Estou%20interessado%20no%20${encodeURIComponent(produto)}`;
+            const mensagem = `Olá, estou interessado no produto "${produto}" da InnoBot Corporation. Por favor, me envie mais informações sobre a compra.`;
+            const telegramUrl = `https://t.me/Devharuzx?text=${encodeURIComponent(mensagem)}`;
             window.open(telegramUrl, '_blank');
         }
+
+        // Exibir a seção inicial
+        window.onload = () => showSection('home'); 
     </script>
 </head>
 <body>
@@ -141,16 +161,21 @@
         <h1>InnoBot Corporation</h1>
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#produtos">Produtos</a></li>
-                <li><a href="#suporte">Suporte</a></li>
-                <li><a href="#termos">Termos</a></li>
-                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#" onclick="showSection('home')">Home</a></li>
+                <li><a href="#" onclick="showSection('produtos')">Produtos</a></li>
+                <li><a href="#" onclick="showSection('suporte')">Suporte</a></li>
+                <li><a href="#" onclick="showSection('termos')">Termos</a></li>
+                <li><a href="#" onclick="showSection('sobre')">Sobre</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="produtos" class="produtos">
+    <section id="home" class="section">
+        <h2>Bem-vindo à InnoBot Corporation!</h2>
+        <p>Oferecemos bots personalizados para diversas necessidades. Explore nossos produtos e entre em contato para mais informações.</p>
+    </section>
+
+    <section id="produtos" class="section produtos">
         <h2>Produtos</h2>
         <div class="produto">
             <h3>Bot de Gerenciamento - R$10</h3>
@@ -166,9 +191,19 @@
         </div>
     </section>
 
-    <section id="suporte" class="suporte">
+    <section id="suporte" class="section">
         <h2>Suporte</h2>
         <p>Entre em contato conosco através do nosso <a href="https://t.me/SuporteInno" target="_blank">Telegram</a>.</p>
+    </section>
+
+    <section id="termos" class="section">
+        <h2>Termos de Serviço</h2>
+        <p>Por favor, leia nossos termos de serviço antes de usar nossos produtos.</p>
+    </section>
+
+    <section id="sobre" class="section">
+        <h2>Sobre Nós</h2>
+        <p>A InnoBot Corporation é especializada em criar bots personalizados para atender a diversas necessidades de negócios.</p>
     </section>
 
     <footer>
