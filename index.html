@@ -4,12 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InnoBot Corporation</title>
-    <link rel="stylesheet" href="style.css"> <!-- Verifique se está correto -->
-    <script src="script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos gerais */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #333;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            color: #ffffff; /* Branco */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #ffffff; /* Branco */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700; /* Dourado */
+        }
+
+        .produtos {
+            padding: 20px;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .produto {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: transform 0.3s;
+        }
+
+        .produto:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .produto h3 {
+            margin: 0;
+            color: #333; /* Preto */
+        }
+
+        .produto button {
+            background-color: #4B0082; /* Roxo */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        .produto button:hover {
+            background-color: #8A2BE2; /* Azul Violeta */
+        }
+
+        .suporte {
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            margin: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #333;
+            color: #ffffff; /* Branco */
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            .produto {
+                padding: 15px;
+            }
+
+            .produto button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+    <script>
+        // Função de compra, redireciona ao Telegram com o produto já selecionado
+        function comprarProduto(produto) {
+            const telegramUrl = `https://t.me/Devharuzx?text=Estou%20interessado%20no%20${encodeURIComponent(produto)}`;
+            window.open(telegramUrl, '_blank');
+        }
+    </script>
 </head>
 <body>
     <header>
-        <h1 class="animated-title">InnoBot Corporation</h1>
+        <h1>InnoBot Corporation</h1>
         <nav>
             <ul>
                 <li><a href="#home">Home</a></li>
