@@ -130,12 +130,28 @@
             z-index: 1000;
         }
 
+        .bar-container {
+            width: 80%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            position: relative;
+        }
+
         .bar {
             width: 0;
             height: 30px;
             background: #ffd700;
             border-radius: 5px;
             transition: width 5s;
+        }
+
+        .percentage {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: #000;
+            font-weight: bold;
+            line-height: 30px; /* Centraliza verticalmente o texto */
         }
     </style>
 </head>
@@ -201,7 +217,10 @@
     </div>
 
     <div id="loading" style="display: none;">
-        <div class="bar" id="loading-bar"></div>
+        <div class="bar-container">
+            <div class="bar" id="loading-bar"></div>
+            <div class="percentage" id="percentage-text">0%</div>
+        </div>
     </div>
 
     <script>
@@ -210,9 +229,27 @@
             const loading = document.getElementById('loading');
             loading.style.display = 'flex';
 
-            // Preencher a barra de carregamento
+            // Inicializar a barra de carregamento e o texto de porcentagem
             const loadingBar = document.getElementById('loading-bar');
-            loadingBar.style.width = '100%';
+            const percentageText = document.getElementById('percentage-text');
+            loadingBar.style.width = '0%';
+            percentageText.textContent = '0%';
+
+            // Preencher a barra de carregamento de 0 a 100%
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    // Ocultar a barra de carregamento após 100%
+                    setTimeout(() => {
+                        loading.style.display = 'none';
+                    }, 500); // Tempo para ocultar a barra
+                } else {
+                    width++;
+                    loadingBar.style.width = width + '%';
+                    percentageText.textContent = width + '%';
+                }
+            }, 50); // Intervalo de 50ms para animação da barra
 
             // Redirecionar após 5 segundos
             setTimeout(() => {
