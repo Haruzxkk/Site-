@@ -1,49 +1,82 @@
-// Função para redirecionar ao Telegram ao clicar em comprar
+// Inicializando as partículas
+particlesJS('particles-js', {
+    particles: {
+        number: { value: 100 },
+        color: { value: '#800080' },
+        shape: {
+            type: 'circle',
+            stroke: { width: 0 },
+        },
+        opacity: { value: 0.5 },
+        size: { value: 3 },
+        line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#800080',
+            opacity: 0.4,
+            width: 1,
+        },
+        move: {
+            enable: true,
+            speed: 2,
+            direction: 'none',
+            random: false,
+            straight: false,
+        },
+    },
+    interactivity: {
+        detect_on: 'canvas',
+        events: {
+            onhover: { enable: true, mode: 'repulse' },
+            onclick: { enable: true, mode: 'push' },
+        },
+    },
+    retina_detect: true,
+});
+
+// Função de compra, redireciona ao Telegram com o produto já selecionado
 function comprarProduto(produto) {
-    const mensagem = encodeURIComponent(`Olá, tenho interesse em comprar o ${produto}.`);
-    const telegramURL = `https://t.me/Devharuzx?text=${mensagem}`;
-    window.open(telegramURL, '_blank');
+    const telegramUrl = `https://t.me/DevHaruzx?text=Estou interessado no ${produto}`;
+    window.open(telegramUrl, '_blank');
 }
 
-// Submissão do formulário de suporte
-document.getElementById('support-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const nome = document.getElementById('nome').value;
-    const email = document.getElementById('email').value;
-    const mensagem = document.getElementById('mensagem').value;
-    const mailtoLink = `mailto:kharuzx@gmail.com?subject=Suporte%20ao%20Cliente&body=Nome:%20${encodeURIComponent(nome)}%0DE-mail:%20${encodeURIComponent(email)}%0DMensagem:%20${encodeURIComponent(mensagem)}`;
-    window.location.href = mailtoLink;
+// Função para salvar a review no LocalStorage
+document.getElementById("review-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    
+    const username = document.getElementById("username").value;
+    const reviewText = document.getElementById("review-text").value;
+    const reviewDate = new Date().toLocaleString();
+    
+    const review = {
+        name: username,
+        text: reviewText,
+        date: reviewDate
+    };
+
+    let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+    reviews.push(review);
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+    
+    displayReviews();
+    document.getElementById("review-form").reset();
 });
 
-// Submissão do formulário de reviews
-document.getElementById('review-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const nome = document.getElementById('review-nome').value;
-    const mensagem = document.getElementById('review-mensagem').value;
-    const data = new Date();
-    const dataFormatada = data.toLocaleDateString('pt-BR');
-    const horaFormatada = data.toLocaleTimeString('pt-BR');
+// Função para exibir as reviews salvas
+function displayReviews() {
+    const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+    const reviewsList = document.getElementById("reviews-list");
+    reviewsList.innerHTML = "";
     
-    const reviewItem = document.createElement('div');
-    reviewItem.classList.add('review-item');
-    
-    const reviewAuthor = document.createElement('p');
-    reviewAuthor.classList.add('review-author');
-    reviewAuthor.textContent = nome;
-    
-    const reviewDate = document.createElement('p');
-    reviewDate.classList.add('review-date');
-    reviewDate.textContent = `Data: ${dataFormatada} - Hora: ${horaFormatada}`;
-    
-    const reviewMessage = document.createElement('p');
-    reviewMessage.textContent = mensagem;
-    
-    reviewItem.appendChild(reviewAuthor);
-    reviewItem.appendChild(reviewDate);
-    reviewItem.appendChild(reviewMessage);
-    
-    document.getElementById('reviews-list').appendChild(reviewItem);
-    
-    // Limpar o formulário
-    document.getElementById('review-form').reset();
-});
+    reviews.forEach((review) => {
+        const reviewElement = document.createElement("div");
+        reviewElement.classList.add("review");
+        reviewElement.innerHTML = `
+            <h4>${review.name} <span>${review.date}</span></h4>
+            <p>${review.text}</p>
+        `;
+        reviewsList.appendChild(reviewElement);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", displayReviews);

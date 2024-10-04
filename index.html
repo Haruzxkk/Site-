@@ -1,118 +1,65 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InnoBot Corporation</title>
-    <!-- Link para o arquivo CSS externo -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
+    <div id="particles-js"></div>
 
-    <!-- Cabeçalho -->
     <header>
         <h1 class="animated-title">InnoBot Corporation</h1>
         <nav>
             <ul>
-                <li><a href="#home">Início</a></li>
+                <li><a href="#home">Home</a></li>
                 <li><a href="#produtos">Produtos</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#termos">Termos</a></li>
-                <li><a href="#suporte">Suporte</a></li>
                 <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#suporte">Suporte</a></li>
+                <li><a href="#termos">Termos</a></li>
+                <li><a href="#sobre">Sobre</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Seção Produtos -->
-    <section id="produtos" class="container">
-        <h2 class="section-title">Nossos Produtos</h2>
-        <div class="product-grid">
-            <!-- Produto 1 -->
-            <div class="product">
-                <img src="images/bot-gerenciamento.jpg" alt="Bot de Gerenciamento">
-                <h3 class="product-title">Bot de Gerenciamento</h3>
-                <p class="product-description">Automatize suas tarefas e gerencie seu projeto com facilidade.</p>
-                <p class="product-price">R$ 10,00</p>
-                <button onclick="comprarProduto('Bot de Gerenciamento')" class="buy-button">Comprar</button>
-            </div>
-            <!-- Produto 2 -->
-            <div class="product">
-                <img src="images/bot-vendas.jpg" alt="Bot de Vendas">
-                <h3 class="product-title">Bot de Vendas (API ou sem)</h3>
-                <p class="product-description">Simplifique suas vendas com integração via API ou sem API.</p>
-                <p class="product-price">R$ 15,00</p>
-                <button onclick="comprarProduto('Bot de Vendas')" class="buy-button">Comprar</button>
-            </div>
-            <!-- Produto 3 -->
-            <div class="product">
-                <img src="images/bot-personalizado.jpg" alt="Bot Personalizado">
-                <h3 class="product-title">Bot Personalizado</h3>
-                <p class="product-description">Desenvolvimento de bot sob medida para suas necessidades.</p>
-                <p class="product-price">R$ 30,00</p>
-                <button onclick="comprarProduto('Bot Personalizado')" class="buy-button">Comprar</button>
-            </div>
+    <section id="produtos" class="produtos">
+        <h2>Produtos</h2>
+        <div class="produto">
+            <h3>Bot de Gerenciamento - R$10</h3>
+            <button onclick="comprarProduto('Bot de Gerenciamento')">Comprar</button>
+        </div>
+        <div class="produto">
+            <h3>Bot de Vendas com API ou sem - R$15</h3>
+            <button onclick="comprarProduto('Bot de Vendas')">Comprar</button>
+        </div>
+        <div class="produto">
+            <h3>Bot Personalizado - R$30</h3>
+            <button onclick="comprarProduto('Bot Personalizado')">Comprar</button>
         </div>
     </section>
 
-    <!-- Seção Sobre -->
-    <section id="sobre" class="about-section">
-        <h2 class="section-title">Sobre Nós</h2>
-        <p class="about-text">
-            A InnoBot Corporation é líder no desenvolvimento de soluções automatizadas para empresas de todos os tamanhos.
-            Com uma equipe especializada e anos de experiência no mercado, nosso objetivo é facilitar a vida de nossos clientes
-            por meio de bots personalizados e sistemas que automatizam processos repetitivos, otimizando tempo e aumentando a produtividade.
-            Queremos estar ao lado do seu negócio, oferecendo soluções inovadoras para enfrentar os desafios do mundo digital.
-        </p>
-    </section>
-
-    <!-- Seção Termos -->
-    <section id="termos" class="terms-section">
-        <h2 class="section-title">Termos e Condições</h2>
-        <ul class="terms-list">
-            <li><strong>Garantia:</strong> Todos os nossos bots possuem garantia de 30 dias para suporte técnico.</li>
-            <li><strong>Reembolso:</strong> Reembolsos serão processados somente em até 7 dias após a compra, desde que o produto não tenha sido utilizado.</li>
-            <li><strong>Responsabilidade:</strong> A InnoBot Corporation não se responsabiliza por danos diretos ou indiretos que possam ocorrer devido ao uso de nossos produtos.</li>
-        </ul>
-    </section>
-
-    <!-- Seção Suporte -->
-    <section id="suporte" class="support-section">
-        <h2 class="section-title">Suporte ao Cliente</h2>
-        <p class="support-text">Precisa de ajuda? Entre em contato conosco preenchendo o formulário abaixo:</p>
-        <form id="support-form">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="mensagem">Mensagem:</label>
-            <textarea id="mensagem" name="mensagem" required></textarea>
-            <button type="submit">Enviar</button>
-        </form>
-    </section>
-
-    <!-- Seção Reviews -->
-    <section id="reviews" class="reviews-section">
-        <h2 class="section-title">Avaliações dos Clientes</h2>
-        <div id="reviews-list">
-            <!-- As reviews serão inseridas aqui -->
-        </div>
-        <h3 class="review-form-title">Deixe sua Avaliação</h3>
+    <section id="reviews" class="reviews">
+        <h2>Avaliações</h2>
         <form id="review-form">
-            <label for="review-nome">Nome:</label>
-            <input type="text" id="review-nome" name="review-nome" required>
-            <label for="review-mensagem">Avaliação:</label>
-            <textarea id="review-mensagem" name="review-mensagem" required></textarea>
-            <button type="submit">Enviar Avaliação</button>
+            <label for="username">Nome:</label>
+            <input type="text" id="username" required>
+            <label for="review-text">Review:</label>
+            <textarea id="review-text" required></textarea>
+            <button type="submit">Enviar Review</button>
         </form>
+        <div id="reviews-list"></div>
     </section>
 
-    <!-- Rodapé -->
+    <section id="suporte" class="suporte">
+        <h2>Suporte</h2>
+        <p>Entre em contato conosco através do nosso <a href="https://t.me/SuporteInno" target="_blank">Telegram</a>.</p>
+    </section>
+
     <footer>
         <p>&copy; 2024 InnoBot Corporation. Todos os direitos reservados.</p>
     </footer>
-
-    <!-- Scripts -->
-    <script src="scripts.js"></script>
 </body>
 </html>
