@@ -1,244 +1,298 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InnoBot Corporation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos gerais */
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            background: linear-gradient(to right, #000000, #ffffff);
             color: #333;
-            overflow-x: hidden;
-            animation: backgroundAnimation 10s ease infinite; /* Animação de fundo */
-            background: linear-gradient(-45deg, #4B0082, #FFD700, #FFFFFF, #333); /* Gradiente de fundo */
-            background-size: 400% 400%; /* Tamanho do fundo para animação */
-        }
-
-        @keyframes backgroundAnimation {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            overflow: hidden;
         }
 
         header {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            position: relative;
+            z-index: 1000;
         }
 
-        header h1 {
-            font-size: 3em;
+        header .logo {
             margin: 0;
-            color: #ffffff; /* Branco */
         }
 
         nav ul {
             list-style: none;
             padding: 0;
-            margin: 15px 0;
         }
 
         nav ul li {
             display: inline;
-            margin: 0 15px;
+            margin-right: 20px;
         }
 
         nav ul li a {
-            color: #ffffff; /* Branco */
+            color: #fff;
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #FFD700; /* Dourado */
         }
 
         .section {
-            display: none; /* Esconder todas as seções por padrão */
             padding: 20px;
-            text-align: center;
+            margin: 10px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: none;
+            transition: all 0.5s ease;
         }
 
         .active {
-            display: block; /* Mostrar a seção ativa */
-        }
-
-        .produtos {
-            display: flex; /* Usar flexbox para alinhar os produtos */
-            justify-content: center; /* Centraliza os produtos */
-            flex-wrap: wrap; /* Permite que os produtos se movam para a linha seguinte */
-            padding: 20px;
-            margin: 20px;
+            display: block;
         }
 
         .produto {
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centraliza o conteúdo dentro do produto */
-            width: 300px; /* Largura fixa para melhor alinhamento */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adicionando sombra para profundidade */
-        }
-
-        .produto:hover {
-            transform: translateY(-5px); /* Animação ao passar o mouse */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
-        }
-
-        .produto h3 {
-            margin: 0;
-            color: #333; /* Preto */
-            transition: color 0.3s;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            position: relative;
         }
 
         .produto button {
-            background-color: #4B0082; /* Roxo */
+            background-color: #007bff;
             color: white;
             border: none;
-            padding: 12px 25px; /* Ajustando o padding */
-            border-radius: 5px;
+            padding: 10px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            font-size: 16px;
-            font-weight: bold; /* Aumentando a espessura da fonte */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease;
         }
 
         .produto button:hover {
-            background-color: #8A2BE2; /* Azul Violeta */
-            transform: scale(1.05); /* Animação de escala ao passar o mouse */
+            background-color: #0056b3;
+        }
+
+        .feedback {
+            display: none;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 3px;
+            animation: fadein 1s, fadeout 1s 2s forwards;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeout {
+            from { opacity: 1; }
+            to { opacity: 0; }
         }
 
         footer {
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #ffffff; /* Branco */
-            padding: 10px;
             text-align: center;
-            position: relative;
+            padding: 10px 0;
+            background: #333;
+            color: #fff;
+        }
+
+        #total {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Styles for loading screen */
+        #loadingScreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            margin-top: 20px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
         }
 
-        footer p {
-            margin: 0;
+        #loadingBar {
+            width: 80%;
+            background-color: #555;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 20px 0;
         }
 
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5em;
-            }
-
-            .produto {
-                padding: 15px;
-                width: 90%; /* Largura maior em dispositivos móveis */
-            }
-
-            .produto button {
-                padding: 8px 16px;
-                font-size: 14px;
-            }
+        #progress {
+            height: 30px;
+            width: 0;
+            background-color: #4caf50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
         }
     </style>
     <script>
-        // Função para mostrar a seção ativa
+        const products = {
+            "Bot de Gerenciamento": 10.00,
+            "Bot de Vendas": 15.00,
+            "Bot Personalizado": 30.00
+        };
+        
+        let cart = [];
+
         function showSection(sectionId) {
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
-                section.classList.remove('active'); // Oculta todas as seções
+                section.classList.remove('active');
+                if (section.id === sectionId) {
+                    section.classList.add('active');
+                }
             });
-            document.getElementById(sectionId).classList.add('active'); // Mostra a seção selecionada
         }
 
-        // Função de compra, redireciona ao Telegram com o produto já selecionado
-        function comprarProduto(produto) {
-            const mensagem = `Olá, estou interessado no produto "${produto}" da InnoBot Corporation. Por favor, me envie mais informações sobre a compra.`;
-            const telegramUrl = `https://t.me/DevHaruzx?text=${encodeURIComponent(mensagem)}`;
-            window.open(telegramUrl, '_blank');
+        function addToCart(productName) {
+            cart.push(productName);
+            displayFeedback(`Adicionado: ${productName}`);
+            updateCartTotal();
         }
 
-        // Exibir a seção inicial
-        window.onload = () => showSection('home'); 
+        function displayFeedback(message) {
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            feedback.textContent = message;
+            document.body.appendChild(feedback);
+            feedback.style.display = 'block';
+            setTimeout(() => {
+                feedback.style.display = 'none';
+                document.body.removeChild(feedback);
+            }, 4000);
+        }
+
+        function updateCartTotal() {
+            const totalElement = document.getElementById('total');
+            const total = cart.reduce((sum, product) => sum + products[product], 0);
+            totalElement.textContent = `Total: R$ ${total.toFixed(2)}`;
+        }
+
+        function buyProduct() {
+            const userName = prompt("Por favor, digite seu nome:");
+            if (userName) {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.style.display = 'flex';
+
+                // Simulação da barra de progresso
+                const progressBar = document.getElementById('progress');
+                let width = 0;
+
+                const interval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        loadingScreen.style.display = 'none'; // Esconde a tela de carregamento
+                        const message = `Olá! Gostaria de comprar os seguintes produtos: ${cart.join(', ')}. Meu nome é: ${userName}. Total: R$ ${cart.reduce((sum, product) => sum + products[product], 0).toFixed(2)}`;
+                        const telegramLink = `https://t.me/DevHaruzx?text=${encodeURIComponent(message)}`;
+                        window.open(telegramLink, "_blank");
+                        cart = []; // Limpa o carrinho após a compra
+                        updateCartTotal();
+                    } else {
+                        width++;
+                        progressBar.style.width = width + '%';
+                        progressBar.innerHTML = width + '%';
+                    }
+                }, 50); // Atualiza a barra de progresso a cada 50ms
+            } else {
+                alert("Você precisa digitar seu nome para continuar.");
+            }
+        }
+
+        window.onload = function () {
+            showSection('home');
+        };
     </script>
 </head>
+
 <body>
     <header>
-        <h1>InnoBot Corporation</h1>
+        <h1 class="logo">InnoBot Corporation</h1>
         <nav>
             <ul>
                 <li><a href="#" onclick="showSection('home')">Home</a></li>
                 <li><a href="#" onclick="showSection('produtos')">Produtos</a></li>
-                <li><a href="#" onclick="showSection('suporte')">Suporte</a></li>
-                <li><a href="#" onclick="showSection('termos')">Termos</a></li>
-                <li><a href="#" onclick="showSection('sobre')">Sobre</a></li>
+                <li><a href="#" onclick="showSection('termos')">Termos de Serviço</a></li>
+                <li><a href="#" onclick="showSection('sobre')">Sobre Nós</a></li>
+                <li><a href="https://t.me/SuporteInno" target="_blank">Suporte</a></li>
+                <li><a href="https://t.me/DevHaruzx" target="_blank">Compra</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="home" class="section">
-        <h2>Bem-vindo à InnoBot Corporation!</h2>
-        <p>Oferecemos bots personalizados para diversas necessidades. Explore nossos produtos e entre em contato para mais informações.</p>
-    </section>
+    <main>
+        <section id="home" class="section active">
+            <h2>Bem-vindo à InnoBot Corporation</h2>
+            <p>Explore nossos produtos inovadores e descubra como nossos bots podem facilitar sua vida!</p>
+        </section>
 
-    <section id="produtos" class="section produtos">
-        <h2>Produtos</h2>
-        <div class="produto">
-            <h3>Bot de Gerenciamento - R$10</h3>
-            <button onclick="comprarProduto('Bot de Gerenciamento')">Comprar</button>
+        <section id="produtos" class="section">
+            <h2>Nossos Produtos</h2>
+            <div class="produto">
+                <h3>Bot de Gerenciamento</h3>
+                <p>Preço: R$ 10,00</p>
+                <button onclick="addToCart('Bot de Gerenciamento')">Adicionar ao Carrinho</button>
+            </div>
+            <div class="produto">
+                <h3>Bot de Vendas</h3>
+                <p>Preço: R$ 15,00</p>
+                <button onclick="addToCart('Bot de Vendas')">Adicionar ao Carrinho</button>
+            </div>
+            <div class="produto">
+                <h3>Bot Personalizado</h3>
+                <p>Preço: R$ 30,00</p>
+                <button onclick="addToCart('Bot Personalizado')">Adicionar ao Carrinho</button>
+            </div>
+            <div id="total">Total: R$ 0.00</div>
+            <button onclick="buyProduct()">Finalizar Compra</button>
+        </section>
+
+        <section id="termos" class="section">
+            <h2>Termos de Serviço</h2>
+            <ul>
+                <li><strong>Uso Adequado:</strong> Os bots devem ser usados de forma responsável.</li>
+                <li><strong>Política de Reembolso:</strong> Consulte nossa política para mais detalhes.</li>
+                <li><strong>Suporte Técnico:</strong> Oferecemos suporte para todos os nossos produtos.</li>
+            </ul>
+        </section>
+
+        <section id="sobre" class="section">
+            <h2>Sobre Nós</h2>
+            <p>A InnoBot Corporation é dedicada a desenvolver soluções de automação através de bots. Nosso objetivo é facilitar a vida dos nossos usuários com produtos inovadores e suporte excepcional.</p>
+        </section>
+
+        <!-- Loading Screen -->
+        <div id="loadingScreen">
+            <div>
+                <h2>Aguarde...</h2>
+                <div id="loadingBar">
+                    <div id="progress">0%</div>
+                </div>
+                <p>Processando sua compra...</p>
+            </div>
         </div>
-        <div class="produto">
-            <h3>Bot de Vendas com API ou sem - R$15</h3>
-            <button onclick="comprarProduto('Bot de Vendas')">Comprar</button>
-        </div>
-        <div class="produto">
-            <h3>Bot Personalizado - R$30</h3>
-            <button onclick="comprarProduto('Bot Personalizado')">Comprar</button>
-        </div>
-    </section>
-
-    <section id="suporte" class="section">
-        <h2>Suporte</h2>
-        <p>Entre em contato conosco através do nosso <a href="https://t.me/SuporteInno" target="_blank">Telegram</a>.</p>
-    </section>
-
-    <section id="termos" class="section">
-        <h2>Termos de Serviço</h2>
-        <p>Nossos termos de serviço foram elaborados para garantir a transparência e a segurança de todos os usuários. Ao utilizar nossos serviços, você concorda em seguir as regras abaixo:</p>
-        <ul style="text-align: left; display: inline-block; padding: 0;">
-            <li><strong>Uso Adequado:</strong> Nossos bots devem ser utilizados de maneira ética e legal.</li>
-            <li><strong>Política de Reembolso:</strong> Reembolsos serão avaliados caso o produto não atenda às expectativas dentro de 7 dias da compra.</li>
-            <li><strong>Suporte Técnico:</strong> Estamos disponíveis para suporte técnico através do nosso canal de suporte.</li>
-            <li><strong>Responsabilidade:</strong> Não nos responsabilizamos por mal-uso dos nossos bots.</li>
-            <li><strong>Alterações:</strong> Reservamo-nos o direito de alterar os termos a qualquer momento, com aviso prévio.</li>
-        </ul>
-        <p>É fundamental que você leia e compreenda nossos termos antes de utilizar os serviços.</p>
-    </section>
-
-    <section id="sobre" class="section">
-        <h2>Sobre Nós</h2>
-        <p>A InnoBot Corporation é uma empresa dedicada ao desenvolvimento de bots personalizados para atender a diversas necessidades. Nossa missão é proporcionar soluções eficientes e acessíveis para nossos clientes, com foco na inovação e na qualidade.</p>
-        <p>Desde nossa fundação, temos trabalhado incansavelmente para garantir que nossos produtos atendam às expectativas do mercado. Com uma equipe experiente e apaixonada, estamos sempre em busca de melhorias e novas funcionalidades.</p>
-        <p>Nosso compromisso é com a satisfação do cliente, e estamos aqui para ajudar em qualquer dúvida ou questão que você possa ter. Entre em contato conosco e venha fazer parte da nossa comunidade!</p>
-    </section>
+    </main>
 
     <footer>
         <p>&copy; 2024 InnoBot Corporation. Todos os direitos reservados.</p>
     </footer>
 </body>
+
 </html>
