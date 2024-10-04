@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnoBot Corporation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1 class="animated-title">InnoBot Corporation</h1>
+        <nav>
+            <ul>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#termos">Termos</a></li>
+                <li><a href="#suporte">Suporte</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Seção Produtos -->
+    <section id="produtos">
+        <h2 class="animated-title">Nossos Produtos</h2>
+        <div class="product">
+            <h3>Bot de Gerenciamento - R$10</h3>
+            <button onclick="openModal('Bot de Gerenciamento')">Comprar</button>
+        </div>
+        <div class="product">
+            <h3>Bot de Vendas (com ou sem API) - R$15</h3>
+            <button onclick="openModal('Bot de Vendas')">Comprar</button>
+        </div>
+        <div class="product">
+            <h3>Bot Personalizado - R$30</h3>
+            <button onclick="openModal('Bot Personalizado')">Comprar</button>
+        </div>
+    </section>
+
+    <!-- Modal de Compra -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <h2>Comprar Produto</h2>
+            <p>Produto Selecionado: <span id="selectedProduct"></span></p>
+            <p>Integração de pagamento Pix não disponível no GitHub Pages.</p>
+            <button onclick="closeModal()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Seção Sobre -->
+    <section id="sobre">
+        <h2 class="animated-title">Sobre Nós</h2>
+        <p>A InnoBot Corporation é especializada em bots personalizados para otimizar negócios e vendas online.</p>
+    </section>
+
+    <!-- Seção Termos -->
+    <section id="termos">
+        <h2 class="animated-title">Termos e Condições</h2>
+        <ul>
+            <li>As compras são definitivas e não reembolsáveis após a conclusão do pagamento.</li>
+            <li>O suporte está disponível para ajudar com qualquer problema relacionado ao uso dos nossos bots.</li>
+        </ul>
+    </section>
+
+    <!-- Seção Suporte -->
+    <section id="suporte">
+        <h2 class="animated-title">Suporte</h2>
+        <form>
+            <input type="text" placeholder="Seu Nome" required>
+            <input type="email" placeholder="Seu E-mail" required>
+            <textarea placeholder="Escreva sua mensagem aqui" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <!-- Seção Reviews -->
+    <section id="reviews">
+        <h2 class="animated-title">Reviews de Clientes</h2>
+        <div id="reviewsList"></div>
+        <div class="review-form">
+            <h3>Deixe sua Review</h3>
+            <textarea id="reviewText" placeholder="Escreva sua review aqui"></textarea>
+            <button onclick="submitReview()">Enviar Review</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 InnoBot Corporation - Todos os direitos reservados</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
