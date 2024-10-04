@@ -1,4 +1,4 @@
-// Inicializando as partículas
+// Inicializando as partículas em todo o site
 particlesJS('particles-js', {
     particles: {
         number: { value: 100 },
@@ -36,7 +36,7 @@ particlesJS('particles-js', {
 
 // Função de compra, redireciona ao Telegram com o produto já selecionado
 function comprarProduto(produto) {
-    const telegramUrl = `https://t.me/DevHaruzx?text=Estou interessado no ${produto}`;
+    const telegramUrl = `https://t.me/Devharuzx?text=Estou interessado no ${produto}`;
     window.open(telegramUrl, '_blank');
 }
 
