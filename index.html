@@ -11,13 +11,27 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f5f5;
             color: #333;
             overflow-x: hidden;
+            animation: backgroundAnimation 10s ease infinite; /* Animação de fundo */
+            background: linear-gradient(-45deg, #4B0082, #FFD700, #FFFFFF, #333); /* Gradiente de fundo */
+            background-size: 400% 400%; /* Tamanho do fundo para animação */
+        }
+
+        @keyframes backgroundAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         header {
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 20px;
             text-align: center;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
@@ -62,8 +76,10 @@
         }
 
         .produtos {
+            display: flex; /* Usar flexbox para alinhar os produtos */
+            justify-content: center; /* Centraliza os produtos */
+            flex-wrap: wrap; /* Permite que os produtos se movam para a linha seguinte */
             padding: 20px;
-            text-align: center;
             margin: 20px;
         }
 
@@ -72,20 +88,24 @@
             border: 1px solid rgba(0, 0, 0, 0.3);
             border-radius: 10px;
             padding: 20px;
-            margin: 15px 0;
+            margin: 15px;
             transition: transform 0.3s, box-shadow 0.3s;
-            display: inline-block;
-            width: 300px; /* Definindo uma largura fixa para melhor alinhamento */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraliza o conteúdo dentro do produto */
+            width: 300px; /* Largura fixa para melhor alinhamento */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adicionando sombra para profundidade */
         }
 
         .produto:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transform: translateY(-5px); /* Animação ao passar o mouse */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
         }
 
         .produto h3 {
             margin: 0;
             color: #333; /* Preto */
+            transition: color 0.3s;
         }
 
         .produto button {
@@ -103,11 +123,11 @@
 
         .produto button:hover {
             background-color: #8A2BE2; /* Azul Violeta */
-            transform: translateY(-2px); /* Pequena animação ao passar o mouse */
+            transform: scale(1.05); /* Animação de escala ao passar o mouse */
         }
 
         footer {
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0.8);
             color: #ffffff; /* Branco */
             padding: 10px;
             text-align: center;
@@ -127,6 +147,7 @@
 
             .produto {
                 padding: 15px;
+                width: 90%; /* Largura maior em dispositivos móveis */
             }
 
             .produto button {
@@ -148,7 +169,7 @@
         // Função de compra, redireciona ao Telegram com o produto já selecionado
         function comprarProduto(produto) {
             const mensagem = `Olá, estou interessado no produto "${produto}" da InnoBot Corporation. Por favor, me envie mais informações sobre a compra.`;
-            const telegramUrl = `https://t.me/Devharuzx?text=${encodeURIComponent(mensagem)}`;
+            const telegramUrl = `https://t.me/DevHaruzx?text=${encodeURIComponent(mensagem)}`;
             window.open(telegramUrl, '_blank');
         }
 
@@ -198,12 +219,22 @@
 
     <section id="termos" class="section">
         <h2>Termos de Serviço</h2>
-        <p>Por favor, leia nossos termos de serviço antes de usar nossos produtos.</p>
+        <p>Nossos termos de serviço foram elaborados para garantir a transparência e a segurança de todos os usuários. Ao utilizar nossos serviços, você concorda em seguir as regras abaixo:</p>
+        <ul style="text-align: left; display: inline-block; padding: 0;">
+            <li><strong>Uso Adequado:</strong> Nossos bots devem ser utilizados de maneira ética e legal.</li>
+            <li><strong>Política de Reembolso:</strong> Reembolsos serão avaliados caso o produto não atenda às expectativas dentro de 7 dias da compra.</li>
+            <li><strong>Suporte Técnico:</strong> Estamos disponíveis para suporte técnico através do nosso canal de suporte.</li>
+            <li><strong>Responsabilidade:</strong> Não nos responsabilizamos por mal-uso dos nossos bots.</li>
+            <li><strong>Alterações:</strong> Reservamo-nos o direito de alterar os termos a qualquer momento, com aviso prévio.</li>
+        </ul>
+        <p>É fundamental que você leia e compreenda nossos termos antes de utilizar os serviços.</p>
     </section>
 
     <section id="sobre" class="section">
         <h2>Sobre Nós</h2>
-        <p>A InnoBot Corporation é especializada em criar bots personalizados para atender a diversas necessidades de negócios.</p>
+        <p>A InnoBot Corporation é uma empresa dedicada ao desenvolvimento de bots personalizados para atender a diversas necessidades. Nossa missão é proporcionar soluções eficientes e acessíveis para nossos clientes, com foco na inovação e na qualidade.</p>
+        <p>Desde nossa fundação, temos trabalhado incansavelmente para garantir que nossos produtos atendam às expectativas do mercado. Com uma equipe experiente e apaixonada, estamos sempre em busca de melhorias e novas funcionalidades.</p>
+        <p>Nosso compromisso é com a satisfação do cliente, e estamos aqui para ajudar em qualquer dúvida ou questão que você possa ter. Entre em contato conosco e venha fazer parte da nossa comunidade!</p>
     </section>
 
     <footer>
