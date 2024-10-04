@@ -3,260 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>InnoBot Corporation</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #2c3e50, #3498db);
+            color: white;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #141e30, #243b55);
-            color: #fff;
-            animation: backgroundAnimation 20s ease infinite;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
         header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            color: #ffffff;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        nav a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #ffd700;
-        }
-
-        .section {
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .produtos-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-        }
-
-        .produto {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 10px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .produto:hover {
-            transform: scale(1.05);
-        }
-
-        button {
-            background-color: #ffd700;
-            border: none;
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        button:hover {
-            background-color: #fff;
-            transform: translateY(-3px);
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        /* Animação de fundo */
-        @keyframes backgroundAnimation {
-            0% {
-                background: linear-gradient(to right, #141e30, #243b55);
-            }
-            50% {
-                background: linear-gradient(to right, #243b55, #141e30);
-            }
-            100% {
-                background: linear-gradient(to right, #141e30, #243b55);
-            }
-        }
-
-        /* Estilos da barra de carregamento */
-        #loading {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            justify-content: center;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            z-index: 1000;
         }
-
-        .bar-container {
-            width: 80%;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 5px;
-            position: relative;
+        h1 {
+            margin: 0;
+            color: #ecf0f1;
         }
-
-        .bar {
-            width: 0;
-            height: 30px;
-            background: #ffd700;
-            border-radius: 5px;
-            transition: width 5s;
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
         }
-
-        .percentage {
-            position: absolute;
-            width: 100%;
-            text-align: center;
-            color: #000;
+        nav ul li {
+            margin-left: 10px; /* Diminui o espaço entre os botões */
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #ecf0f1;
             font-weight: bold;
-            line-height: 30px; /* Centraliza verticalmente o texto */
+            padding: 5px 10px; /* Botões menores */
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Efeito de hover mais sutil */
+        }
+        section {
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .produto {
+            margin: 15px 0;
+            border: 1px solid #ecf0f1;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        /* Estilo para o sistema de suporte */
+        #supportForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+        #supportForm label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        #supportForm input, 
+        #supportForm textarea {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+        }
+        #supportResponse {
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #2ecc71; /* Cor para mensagem de sucesso */
+        }
+        #supportResponse.error {
+            color: #e74c3c; /* Cor para mensagem de erro */
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>InnoBot Corporation</h1>
-            <nav>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#produtos">Produtos</a></li>
-                    <li><a href="#termos">Termos de Serviço</a></li>
-                    <li><a href="#sobre">Sobre Nós</a></li>
-                    <li><a href="#suporte">Suporte</a></li>
-                </ul>
-            </nav>
-        </header>
-        
-        <section id="home" class="section">
-            <h2>Bem-vindo à InnoBot Corporation!</h2>
-            <p>Explore nossos bots inovadores e encontre a solução perfeita para suas necessidades.</p>
-        </section>
+    <header>
+        <h1>InnoBot Corporation</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#suporte">Suporte</a></li>
+                <li><a href="#termos">Termos</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home">
+        <h2>Bem-vindo à InnoBot Corporation</h2>
+        <p>Oferecemos bots personalizados para atender às suas necessidades. Navegue pelos nossos produtos e saiba mais!</p>
+    </section>
 
-        <section id="produtos" class="section">
-            <h2>Nossos Produtos</h2>
-            <div class="produtos-container">
-                <div class="produto">
-                    <h3>Bot de Gerenciamento</h3>
-                    <p>Preço: R$10,00</p>
-                    <button onclick="comprar('Bot de Gerenciamento', 10)">Comprar</button>
-                </div>
-                <div class="produto">
-                    <h3>Bot de Vendas</h3>
-                    <p>Preço: R$15,00</p>
-                    <button onclick="comprar('Bot de Vendas', 15)">Comprar</button>
-                </div>
-                <div class="produto">
-                    <h3>Bot Personalizado</h3>
-                    <p>Preço: R$30,00</p>
-                    <button onclick="comprar('Bot Personalizado', 30)">Comprar</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="termos" class="section">
-            <h2>Termos de Serviço</h2>
-            <p>Estes são os termos de serviço da InnoBot Corporation...</p>
-        </section>
-
-        <section id="sobre" class="section">
-            <h2>Sobre Nós</h2>
-            <p>A InnoBot Corporation é uma empresa dedicada a desenvolver soluções em bots...</p>
-        </section>
-
-        <section id="suporte" class="section">
-            <h2>Suporte</h2>
-            <p>Para suporte, entre em contato pelo <a href="https://t.me/SuporteInno" target="_blank">Telegram</a>.</p>
-        </section>
-
-        <footer>
-            <p>&copy; 2024 InnoBot Corporation. Todos os direitos reservados.</p>
-        </footer>
-    </div>
-
-    <div id="loading" style="display: none;">
-        <div class="bar-container">
-            <div class="bar" id="loading-bar"></div>
-            <div class="percentage" id="percentage-text">0%</div>
+    <section id="produtos">
+        <h2>Produtos</h2>
+        <div class="produto">
+            <h3>Bot de Gerenciamento</h3>
+            <p>Preço: R$10,00</p>
+            <button onclick="comprarProduto('Bot de Gerenciamento', 10)">Comprar</button>
         </div>
-    </div>
+        <div class="produto">
+            <h3>Bot de Vendas</h3>
+            <p>Preço: R$15,00</p>
+            <button onclick="comprarProduto('Bot de Vendas', 15)">Comprar</button>
+        </div>
+        <div class="produto">
+            <h3>Bot Personalizado</h3>
+            <p>Preço: R$30,00</p>
+            <button onclick="comprarProduto('Bot Personalizado', 30)">Comprar</button>
+        </div>
+    </section>
 
+    <section id="suporte">
+        <h2>Suporte</h2>
+        <p>Se você tiver dúvidas ou precisar de assistência, preencha o formulário abaixo:</p>
+        <form id="supportForm">
+            <label for="userEmail">Seu E-mail:</label>
+            <input type="email" id="userEmail" required>
+            <label for="userMessage">Mensagem:</label>
+            <textarea id="userMessage" required></textarea>
+            <button type="button" onclick="enviarSuporte()">Enviar</button>
+        </form>
+        <div id="supportResponse" style="display:none;"></div>
+    </section>
+
+    <section id="termos">
+        <h2>Termos de Serviço</h2>
+        <p>Leia nossos termos de serviço antes de utilizar nossos produtos.</p>
+    </section>
+
+    <section id="sobre">
+        <h2>Sobre Nós</h2>
+        <p>Conheça mais sobre a InnoBot Corporation e nossa missão.</p>
+    </section>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-        function comprar(produto, preco) {
-            // Exibir a barra de carregamento
-            const loading = document.getElementById('loading');
-            loading.style.display = 'flex';
+        (function(){
+            emailjs.init("hfpjRhtUxvzlcSuob"); // Chave pública
+        })();
 
-            // Inicializar a barra de carregamento e o texto de porcentagem
-            const loadingBar = document.getElementById('loading-bar');
-            const percentageText = document.getElementById('percentage-text');
-            loadingBar.style.width = '0%';
-            percentageText.textContent = '0%';
-
-            // Preencher a barra de carregamento de 0 a 100%
-            let width = 0;
+        function comprarProduto(nome, preco) {
+            const mensagem = `Olá! Eu gostaria de comprar o ${nome} por R$${preco},00.`;
+            // Simulando uma tela de carregamento
+            document.body.innerHTML += `
+                <div id="loadingScreen" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); color:white; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                    <h2>Aguarde um momento...</h2>
+                    <div style="width: 100%; max-width: 400px;">
+                        <div id="progressBar" style="background-color: #3498db; height: 20px; width: 0%;"></div>
+                    </div>
+                    <span id="progressText">0%</span>
+                </div>
+            `;
+            let progress = 0;
             const interval = setInterval(() => {
-                if (width >= 100) {
+                if (progress >= 100) {
                     clearInterval(interval);
-                    // Ocultar a barra de carregamento após 100%
                     setTimeout(() => {
-                        loading.style.display = 'none';
-                    }, 500); // Tempo para ocultar a barra
+                        window.open(`https://t.me/DevHaruzx?text=${encodeURIComponent(mensagem)}`, "_blank");
+                        document.getElementById("loadingScreen").remove();
+                    }, 500);
                 } else {
-                    width++;
-                    loadingBar.style.width = width + '%';
-                    percentageText.textContent = width + '%';
+                    progress++;
+                    document.getElementById("progressBar").style.width = `${progress}%`;
+                    document.getElementById("progressText").innerText = `${progress}%`;
                 }
-            }, 50); // Intervalo de 50ms para animação da barra
+            }, 50);
+        }
 
-            // Redirecionar após 5 segundos
-            setTimeout(() => {
-                const message = `Olá! Eu gostaria de comprar o ${produto} por R$${preco}.`;
-                const telegramLink = `https://t.me/DevHaruzx?text=${encodeURIComponent(message)}`;
-                window.location.href = telegramLink;
-            }, 5000);
+        function enviarSuporte() {
+            const email = document.getElementById("userEmail").value;
+            const message = document.getElementById("userMessage").value;
+            const supportResponse = document.getElementById("supportResponse");
+            const templateParams = {
+                email: email,
+                message: message,
+            };
+
+            // Envia o e-mail usando o EmailJS
+            emailjs.send("service_pkrhrjg", "template_05i78td", templateParams)
+                .then(function (response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    supportResponse.innerText = "Sua mensagem foi enviada com sucesso!";
+                    supportResponse.classList.remove('error');
+                    supportResponse.classList.add('success');
+                    supportResponse.style.display = "block";
+                    // Limpar os campos após o envio
+                    document.getElementById("userEmail").value = "";
+                    document.getElementById("userMessage").value = "";
+                }, function (error) {
+                    console.log('FAILED...', error);
+                    supportResponse.innerText = "Ocorreu um erro ao enviar sua mensagem. Tente novamente.";
+                    supportResponse.classList.add('error');
+                    supportResponse.style.display = "block";
+                });
         }
     </script>
 </body>
