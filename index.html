@@ -141,12 +141,12 @@
     <section id="suporte">
         <h2>Suporte</h2>
         <p>Se você tiver dúvidas ou precisar de assistência, preencha o formulário abaixo:</p>
-        <form id="supportForm">
+        <form id="supportForm" action="https://formspree.io/f/meoqjayj" method="POST">
             <label for="userEmail">Seu E-mail:</label>
-            <input type="email" id="userEmail" required>
+            <input type="email" name="userEmail" id="userEmail" required>
             <label for="userMessage">Mensagem:</label>
-            <textarea id="userMessage" required></textarea>
-            <button type="button" onclick="enviarSuporte()">Enviar</button>
+            <textarea name="userMessage" id="userMessage" required></textarea>
+            <button type="submit">Enviar</button>
         </form>
         <div id="supportResponse" style="display:none;"></div>
     </section>
@@ -161,12 +161,7 @@
         <p>Conheça mais sobre a InnoBot Corporation e nossa missão.</p>
     </section>
 
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-        (function(){
-            emailjs.init("hfpjRhtUxvzlcSuob"); // Chave pública
-        })();
-
         function comprarProduto(nome, preco) {
             const mensagem = `Olá! Eu gostaria de comprar o ${nome} por R$${preco},00.`;
             // Simulando uma tela de carregamento
@@ -193,34 +188,6 @@
                     document.getElementById("progressText").innerText = `${progress}%`;
                 }
             }, 50);
-        }
-
-        function enviarSuporte() {
-            const email = document.getElementById("userEmail").value;
-            const message = document.getElementById("userMessage").value;
-            const supportResponse = document.getElementById("supportResponse");
-            const templateParams = {
-                email: email,
-                message: message,
-            };
-
-            // Envia o e-mail usando o EmailJS
-            emailjs.send("service_pkrhrjg", "template_05i78td", templateParams)
-                .then(function (response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    supportResponse.innerText = "Sua mensagem foi enviada com sucesso!";
-                    supportResponse.classList.remove('error');
-                    supportResponse.classList.add('success');
-                    supportResponse.style.display = "block";
-                    // Limpar os campos após o envio
-                    document.getElementById("userEmail").value = "";
-                    document.getElementById("userMessage").value = "";
-                }, function (error) {
-                    console.log('FAILED...', error);
-                    supportResponse.innerText = "Ocorreu um erro ao enviar sua mensagem. Tente novamente.";
-                    supportResponse.classList.add('error');
-                    supportResponse.style.display = "block";
-                });
         }
     </script>
 </body>
